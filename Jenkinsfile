@@ -5,9 +5,17 @@ pipeline{
         jdk 'JDK 9'
    }
    stages {
-      stage ('Compile Stage'){
+      stage ('Build Stage'){
          steps{
                bat "mvn clean install"
+         }
+      }
+
+      stage ('Deploy Stage'){
+         steps{
+               sshagent (['tomcat-dev']){
+                  bat "scp -o StrictHostKeyChecking=no target/*.war 192.168.206.131:/var/lib/tomcat8/webapps"
+               }
          }
       }
    }
