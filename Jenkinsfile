@@ -14,7 +14,7 @@ pipeline{
       stage ('Deploy Stage'){
          steps{
                sshagent (['tomcat-dev']){
-                  bat "scp -o StrictHostKeyChecking=no target/*.war 192.168.206.131:/var/lib/tomcat8/webapps"
+                  bat "scp -o StrictHostKeyChecking=no target/*.war kamransaeed@192.168.206.131:/var/lib/tomcat8/webapps"
                }
          }
       }
