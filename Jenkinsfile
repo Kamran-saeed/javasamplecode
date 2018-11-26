@@ -13,7 +13,7 @@ pipeline{
 
       stage ('Deploy Stage'){
          node{
-            sshagent (['tomcat-dev']){
+            sshagent (['11ac9a7e-4532-4c30-9253-b8d6ac46bd60']){
                sh "scp -o StrictHostKeyChecking=no target/*.war kamransaeed@192.168.206.131:/var/lib/tomcat8/webapps"
             }
          }
