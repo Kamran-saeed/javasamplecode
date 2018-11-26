@@ -1,0 +1,12 @@
+node{
+    stage ('Build Stage'){
+        def mvnHome = tool name: 'Apache Maven 3.6.0', type: 'maven'
+        bat "${mvnHome}/bin/mvn clean install"
+    }
+
+    stage ('Deploy Stage'){
+        sshagent (['25f5ce22-f3b2-465d-b4fe-acc826416d76']){
+            sh "scp -o StrictHostKeyChecking=no target/*.war ec2-user@52.41.79.134:/home/"
+        }
+    }
+}
