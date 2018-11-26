@@ -7,12 +7,12 @@ pipeline{
    stages {
       stage ('Build Stage'){
          steps{
-               bat "mvn clean install"
+            bat "mvn clean install"
          }
       }
 
       stage ('Deploy Stage'){
-         steps{
+         node{
             sshagent (['tomcat-dev']){
                sh "scp -o StrictHostKeyChecking=no target/*.war kamransaeed@192.168.206.131:/var/lib/tomcat8/webapps"
             }
